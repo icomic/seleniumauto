@@ -24,7 +24,11 @@ public class AutoSelenium {
         driver.get("https://autoplius.lt/");
         // Checking if headless is working and autoplius.lt quick search is visible
         var quickSearch = driver.findElement(By.id("fastsearchbox"));
-        System.out.println(quickSearch);
+        if(quickSearch.isDisplayed()){
+            System.out.println("Quick search is visible. Headless works.");
+        } else {
+            System.out.println("Something went wrong. Quick search is not visible.");
+        }
 
         // 2. Selecting Make from DropDown
         Select clickAudiMake = new Select(driver.findElement(By.id("make_id")));
