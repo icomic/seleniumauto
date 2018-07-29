@@ -53,9 +53,9 @@ public class AutoSelenium {
         searchButton.click();
 
         // 7.1. Checking: How many results are displayed
-        var resultCheck = driver.findElement(By.className("result-count")).getText().replaceAll("[()]", "");
-        int resultCheckStringToInt = Integer.parseInt(resultCheck);
-        System.out.println("Displayed result: " + resultCheckStringToInt);
+        var resultCheckWithInput = driver.findElement(By.className("result-count")).getText().replaceAll("[()]", "");
+        int resultCheckStringToInt = Integer.parseInt(resultCheckWithInput);
+        System.out.println("Displayed result with text input: " + resultCheckStringToInt);
 
 
         // 7.2. Checking: If all parameters where involved into search.
@@ -82,7 +82,7 @@ public class AutoSelenium {
         // 9. Compare results before with input and without input
         var resultWithoutInput = driver.findElement(By.className("result-count")).getText().replaceAll("[()]", "");
         int resultWithoutInputStringToInt = Integer.parseInt(resultWithoutInput);
-        System.out.println("Displayed result: " + resultWithoutInputStringToInt);
+        System.out.println("Displayed result without text input: " + resultWithoutInputStringToInt);
         if (resultCheckStringToInt < resultWithoutInputStringToInt) {
             System.out.println("More results displayed without text input 'geras' : " + resultCheckStringToInt + " < " + resultWithoutInput);
         } else if (resultCheckStringToInt < resultWithoutInputStringToInt) {
@@ -120,8 +120,7 @@ public class AutoSelenium {
                 System.out.println("Error message not displayed");
             }
 
-            // Uždaroma naršyklė
-        driver.close();
+            //Information message that test is finished
         System.out.println("Test completed!");
 
     }
