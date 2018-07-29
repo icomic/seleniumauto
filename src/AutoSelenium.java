@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -12,10 +13,18 @@ import java.util.concurrent.TimeUnit;
 
 public class AutoSelenium {
     public static void main(String[] args) {
+
+        // Headless browser
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+
         // 1. Open Autoplius
-        ChromeDriver driver = new ChromeDriver();
+        ChromeDriver driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://autoplius.lt/");
+        // Checking if headless is working and autoplius.lt quick search is visible
+        var quickSearch = driver.findElement(By.id("fastsearchbox"));
+        System.out.println(quickSearch);
 
         // 2. Selecting Make from DropDown
         Select clickAudiMake = new Select(driver.findElement(By.id("make_id")));
@@ -106,6 +115,10 @@ public class AutoSelenium {
             } else {
                 System.out.println("Error message not displayed");
             }
+
+            // Uždaroma naršyklė
+        driver.close();
+        System.out.println("Test completed!");
 
     }
 }
